@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Select Service</title>
+    <link rel="stylesheet" href="{% static 'css/tailwind.css' %}" />
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
+      <h2 class="text-2xl font-bold mb-6 text-center">
+        Select a Service for Your Pet
+      </h2>
+      {% if user.is_authenticated %}
+      <form method="POST">
+        {% csrf_token %} {{ form.as_p }}
+        <button
+          type="submit"
+          class="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg"
+        >
+          Submit
+        </button>
+      </form>
+      {% else %}
+      <p class="text-center text-gray-700 text-lg">
+        Please
+        <a href="{% url 'login' %}" class="text-blue-500 hover:underline"
+          >log in</a
+        >
+        to book a pet care service.
+      </p>
+      {% endif %}
+    </div>
+  </body>
+</html>

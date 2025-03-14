@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pet Care Services</title>
+    <link rel="stylesheet" href="{% static 'css/tailwind.css' %}" />
+  </head>
+  <body class="bg-gray-100">
+    <div class="container mx-auto p-6">
+      <h1 class="text-3xl font-bold mb-6">Pet Care Services</h1>
+      {% if user.is_authenticated %}
+      <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for service in services %}
+        <li class="bg-white p-4 rounded-lg shadow-lg">
+          {% if service.image %}
+          <img
+            src="{{ service.image.url }}"
+            alt="{{ service.name }}"
+            class="w-full h-48 object-cover rounded-lg mb-4"
+          />
+          {% endif %}
+          <h2 class="text-xl font-bold">{{ service.name }}</h2>
+          <p class="text-gray-700">{{ service.description }}</p>
+          <p class="text-green-600 font-bold mt-2">${{ service.price }}</p>
+          <a
+            href="{% url 'select_service' %}"
+            class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg mt-4 inline-block"
+          >
+            Select Service
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p class="text-center text-gray-700 text-lg">
+        Please
+        <a href="{% url 'login' %}" class="text-blue-500 hover:underline"
+          >log in</a
+        >
+        to view and book pet care services.
+      </p>
+      {% endif %}
+    </div>
+  </body>
+</html>

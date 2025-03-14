@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "users",
+    "pet_care",
 ]
 
 MIDDLEWARE = [
@@ -124,6 +125,10 @@ STATICFILES_DIRS = [
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -134,3 +139,7 @@ AUTH_USER_MODEL = "users.User"
 
 
 # EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+
+LOGIN_URL = "login/"  # Adjust this path to your login URL
+LOGIN_REDIRECT_URL = ""  # Redirect users to the home page or another page after login
