@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Pets</title>
+    <link rel="stylesheet" href="{% static 'css/tailwind.css' %}" />
+  </head>
+  <body class="bg-gray-100">
+    <div class="container mx-auto p-6">
+      <h1 class="text-3xl font-bold mb-6">My Pets</h1>
+
+      <!-- Flex container for buttons -->
+      <div class="flex justify-between items-center mb-4">
+        <a
+          href="{% url 'pet_create' %}"
+          class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg"
+        >
+          Add New Pet
+        </a>
+        <a
+          href="{% url 'logout' %}"
+          class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg"
+        >
+          Log Out
+        </a>
+      </div>
+
+      <ul class="bg-white rounded-lg shadow-md p-4">
+        {% for pet in pets %}
+        <li
+          class="py-2 border-b border-gray-200 flex justify-between items-center"
+        >
+          <span>{{ pet.name }} ({{ pet.species }})</span>
+          <div>
+            <a
+              href="{% url 'pet_update' pet.id %}"
+              class="text-blue-500 hover:underline"
+              >Edit</a
+            >
+            |
+            <a
+              href="{% url 'pet_delete' pet.id %}"
+              class="text-red-500 hover:underline"
+              >Delete</a
+            >
+          </div>
+        </li>
+        {% empty %}
+        <li class="text-gray-500 text-center">No pets found.</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </body>
+</html>
